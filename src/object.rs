@@ -4,8 +4,7 @@ use enum_primitive::FromPrimitive;
 use itertools::Itertools;
 use std::ops::Add;
 
-extern crate chrono;
-use self::chrono::Duration;
+use chrono::Duration;
 
 use crate::{
     CodePair, Color, DataTableValue, DxfError, DxfResult, Point, SectionTypeSettings,
@@ -62,7 +61,7 @@ impl MLineStyleElement {
 //------------------------------------------------------------------------------
 impl DataTable {
     pub(crate) fn set_value(&mut self, row: usize, col: usize, val: DataTableValue) {
-        if row <= self.row_count && col <= self.column_count {
+        if row < self.row_count && col < self.column_count {
             self.values[row][col] = Some(val);
         }
     }

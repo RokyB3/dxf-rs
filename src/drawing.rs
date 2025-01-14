@@ -1,8 +1,6 @@
-extern crate encoding_rs;
-use self::encoding_rs::Encoding;
+use encoding_rs::Encoding;
 
-extern crate image;
-use self::image::DynamicImage;
+use image::DynamicImage;
 
 use crate::code_pair_put_back::CodePairPutBack;
 use crate::drawing_item::{DrawingItem, DrawingItemMut};
@@ -39,6 +37,7 @@ use std::path::Path;
 pub(crate) const AUTO_REPLACE_HANDLE: Handle = Handle(0xFFFF_FFFF_FFFF_FFFF);
 
 /// Represents a DXF drawing.
+#[derive(Debug, Clone)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize, serde::Deserialize))]
 pub struct Drawing {
     /// The drawing's header.  Contains various drawing-specific values and settings.

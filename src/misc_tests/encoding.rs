@@ -6,8 +6,7 @@ use crate::*;
 use std::io::{BufReader, Cursor, Seek, SeekFrom};
 use std::str::from_utf8;
 
-extern crate image;
-use self::image::{DynamicImage, GenericImageView};
+use image::{DynamicImage, GenericImageView};
 
 #[test]
 fn read_string_with_control_characters() {
@@ -511,7 +510,7 @@ fn round_trip_thumbnail(thumbnail: image::DynamicImage) -> image::DynamicImage {
     let drawing_pairs = drawing.code_pairs().unwrap();
     assert_vec_contains(
         &drawing_pairs,
-        &vec![
+        &[
             CodePair::new_str(0, "SECTION"),
             CodePair::new_str(2, "THUMBNAILIMAGE"),
         ],

@@ -1,7 +1,6 @@
-extern crate xmltree;
-use self::xmltree::Element;
 use crate::other_helpers::*;
 use crate::ExpectedType;
+use xmltree::Element;
 
 pub fn attr(element: &Element, name: &str) -> String {
     match element.attributes.get(name) {
@@ -27,10 +26,10 @@ pub fn codes(element: &Element) -> Vec<i32> {
     if code_overrides.is_empty() {
         vec![code(element)]
     } else {
-        return code_overrides
+        code_overrides
             .split(',')
             .map(|c| c.parse::<i32>().unwrap())
-            .collect::<Vec<_>>();
+            .collect::<Vec<_>>()
     }
 }
 

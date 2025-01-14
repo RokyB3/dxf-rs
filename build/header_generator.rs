@@ -1,5 +1,4 @@
-extern crate xmltree;
-use self::xmltree::Element;
+use xmltree::Element;
 
 use crate::ExpectedType;
 
@@ -32,15 +31,13 @@ use crate::{
 use crate::helper_functions::*;
 
 use crate::enums::*;
-use crate::enum_primitive::FromPrimitive;
+use enum_primitive::FromPrimitive;
 
 use std::time::Duration;
 
-extern crate chrono;
-use self::chrono::{DateTime, Local, Utc};
+use chrono::{DateTime, Local, Utc};
 
-extern crate uuid;
-use self::uuid::Uuid;
+use uuid::Uuid;
 ".trim_start());
     generate_struct(&mut fun, &element);
 
@@ -60,6 +57,7 @@ use self::uuid::Uuid;
 fn generate_struct(fun: &mut String, element: &Element) {
     let mut seen_fields = HashSet::new();
     fun.push_str("/// Contains common properties for the DXF file.\n");
+    fun.push_str("#[derive(Debug, Clone)]\n");
     fun.push_str(
         "#[cfg_attr(feature = \"serialize\", derive(serde::Serialize, serde::Deserialize))]\n",
     );

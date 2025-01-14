@@ -1,7 +1,6 @@
 use std::io::Write;
 
-extern crate byteorder;
-use self::byteorder::{LittleEndian, WriteBytesExt};
+use byteorder::{LittleEndian, WriteBytesExt};
 
 use crate::{Drawing, DxfResult};
 
@@ -45,7 +44,7 @@ impl<T: Write> DxbWriter<T> {
         if writing_block {
             self.write_entities(&drawing.blocks().next().unwrap().entities)?;
         } else {
-            let groups = drawing.entities().group_by(|&e| e.common.layer.clone());
+            let groups = drawing.entities().chunk_by(|&e| e.common.layer.clone());
             for (layer, entities) in &groups {
                 self.write_item_type(DxbItemType::NewLayer)?;
                 self.write_null_terminated_string(&layer)?;

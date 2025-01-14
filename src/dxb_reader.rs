@@ -271,7 +271,7 @@ impl<T: Read> DxbReader<T> {
     fn wrap_common_values(&self, specific: EntityType) -> Entity {
         let mut entity = Entity::new(specific);
         entity.common.color = self.current_color.clone();
-        entity.common.layer = self.layer_name.clone();
+        entity.common.layer.clone_from(&self.layer_name);
         entity
     }
     fn read_null_terminated_string(&mut self) -> DxfResult<String> {
@@ -296,9 +296,9 @@ impl<T: Read> DxbReader<T> {
         Ok(value)
     }
     fn read_f(&mut self) -> DxfResult<f64> {
-        let value = read_f64(&mut self.reader)?;
+        let value = read_f64(&mut self.reader);
         self.advance_offset(8);
-        Ok(value)
+        Ok(value.or::<f64>(Ok(0.0)).unwrap())
     }
     fn read_n(&mut self) -> DxfResult<f64> {
         if self.is_integer_mode {
